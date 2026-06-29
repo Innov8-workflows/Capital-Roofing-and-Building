@@ -735,9 +735,16 @@ section{position:relative}
   back.addEventListener('click',closeMenu);
   mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
 
-  // Hero background video — ensure playback after load (autoplay fallback)
+  // Hero background video — autoplay, with retries for autoplay-restricted browsers
   var heroVid=document.querySelector('.hero-video');
-  if(heroVid){var hp=heroVid.play();if(hp&&hp.catch)hp.catch(function(){});}
+  if(heroVid){
+    var tryPlay=function(){var hp=heroVid.play();if(hp&&hp.catch)hp.catch(function(){});};
+    tryPlay();
+    heroVid.addEventListener('canplay',tryPlay);
+    // Retry on first user interaction (covers browsers that block muted autoplay)
+    var once=function(){tryPlay();['pointerdown','touchstart','scroll','keydown'].forEach(function(ev){window.removeEventListener(ev,once);});};
+    ['pointerdown','touchstart','scroll','keydown'].forEach(function(ev){window.addEventListener(ev,once,{passive:true});});
+  }
 
   // Before/After video — autoplay when scrolled into view, pause when out
   var baVideo=document.getElementById('baVideo');
