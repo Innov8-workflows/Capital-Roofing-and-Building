@@ -84,8 +84,8 @@ section{position:relative}
 .hero-slide.active{opacity:1}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,24,39,.74) 0%,rgba(8,24,39,.6) 45%,rgba(8,24,39,.82) 100%)}
 .hero-inner{position:relative;z-index:2;text-align:center;color:#fff;padding:70px 20px;width:min(900px,92vw)}
-.hero-plate{background:#fff;border-radius:18px;padding:30px 40px;box-shadow:var(--shadow-lg);display:inline-block;border-top:5px solid var(--gold);margin-bottom:30px}
-.hero-plate img{height:clamp(120px,20vw,188px);width:auto}
+.hero-plate{display:inline-block;margin-bottom:30px}
+.hero-plate img{height:clamp(120px,20vw,188px);width:auto;filter:drop-shadow(0 4px 16px rgba(0,0,0,.6))}
 .hero h1{font-size:clamp(1.8rem,4.6vw,3.15rem);color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.4);margin-bottom:16px}
 .hero h1 .accent{color:var(--gold-bright)}
 .hero-sub{font-size:clamp(1rem,2vw,1.18rem);color:#dde6ef;max-width:640px;margin:0 auto 30px}
@@ -361,9 +361,7 @@ section{position:relative}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <video class="hero-video" autoplay muted loop playsinline poster="hero-poster.jpg" preload="auto">
-    <source src="hero-bg-v2.mp4" type="video/mp4">
-  </video>
+  <video class="hero-video" src="hero-bg-v2.mp4" autoplay muted loop playsinline poster="hero-poster.jpg" preload="auto"></video>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-plate"><img src="logo-polished.png" alt="Capital Roofing and Building Ltd logo"></div>
