@@ -736,8 +736,11 @@ section{position:relative}
   // Hero background video — autoplay, with retries for autoplay-restricted browsers
   var heroVid=document.querySelector('.hero-video');
   if(heroVid){
-    var tryPlay=function(){var hp=heroVid.play();if(hp&&hp.catch)hp.catch(function(){});};
+    // Force muted PROPERTY (some engines ignore the attribute for autoplay eligibility)
+    heroVid.muted=true; heroVid.defaultMuted=true; heroVid.setAttribute('muted','');
+    var tryPlay=function(){heroVid.muted=true;var hp=heroVid.play();if(hp&&hp.catch)hp.catch(function(){});};
     tryPlay();
+    heroVid.addEventListener('loadedmetadata',tryPlay);
     heroVid.addEventListener('canplay',tryPlay);
     // Retry on first user interaction (covers browsers that block muted autoplay)
     var once=function(){tryPlay();['pointerdown','touchstart','scroll','keydown'].forEach(function(ev){window.removeEventListener(ev,once);});};
